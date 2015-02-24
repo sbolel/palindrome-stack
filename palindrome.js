@@ -1,37 +1,6 @@
 // Basic programming example of detecting Palindromes using an array stack
 
 /*
- *  Stack Class
- */
-function Stack() {
-  this.val = new Array();
-  this.tail = 0;
-  console.debug("Initialized Stack:",this.val,"Tail:",this.tail);
-}
-
-Stack.prototype.push = function(val) {
-  this.val[this.tail] = val;
-  this.tail++;
-  console.debug(" - Pushed(",val,") Stack.value:",this.val," Stack.tail is now:",this.tail);
-}
-
-Stack.prototype.pop = function() {
-    var poppedItem = this.val[this.tail-1];
-    this.tail--;
-    console.debug(" - Popped(",poppedItem,") Stack.value:",this.val," Stack.tail is now:",this.tail);
-    return poppedItem; 
-}
-
-Stack.prototype.getStack = function() {
-  return this.val;
-}
-
-Stack.prototype.isEmpty = function() {
-  return this.tail == 0;
-}
-
-
-/*
  *  Palindrome Class
  */
 function Palindrome(word) {
@@ -94,53 +63,4 @@ Palindrome.prototype.testMatch = function() {
   // Otherwise, return true (note: not a good way of doing this)
   return true;
 }
-
-
-/*
- *  Page JavaScript
- */
-// Change the value of the result <div> to a message.
-function writeResultMessage(matchedBoolean, inputValue) {
-  // Build result message string
-  var resultMessage = "\"" + inputValue + "\"";
-  if (typeof(matchedBoolean) != 'undefined') {
-    if (matchedBoolean) {
-      resultMessage += " is a palindrome :)";
-    } else {
-      resultMessage += " is NOT a palindrome :(";
-    }
-  } else {
-    resultMessage = "You need to enter a word.";
-  }
-  // Write the message to html
-  document.getElementById("palindromeResult").innerHTML = resultMessage;
-}
-
-// Button click listener
-function clickCallback() {
-  // Get the value of the HTML input element
-  var input = document.getElementById("palindromeInput");
-  var palindrome = new Palindrome(input.value);
-  writeResultMessage(palindrome.isMatch, input.value);
-}
-
-// Page initialization function
-function pageInit() {
-  // Get the button HTML element
-  var button = document.getElementById("palindromeButton");
-  // Attach an event listener for button clicked to call 'clickCallback'
-  if (button.addEventListener) {
-      button.addEventListener("click", clickCallback);  //Modern browsers
-  } else if (button.attachEvent) {
-    button.attachEvent("onsubmit", callback);           //Old IE
-  } else {
-    console.error("Your browser does not support listeners.");
-  }
-}
-
-// Call pageInit() when the window loads.
-window.addEventListener("load", function load(event){
-  window.removeEventListener("load", load, false); //remove listener, no longer needed
-  pageInit();
-},false);
 
